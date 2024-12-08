@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: laba-front-db
+      POSTGRES_USER: dias
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+  api:
+    build: ./api
+    container_name: api
+    restart: always
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/laba-front-db
+      POSTGRES_USER: dias
+      POSTGRES_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
