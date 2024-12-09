@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-internal class Student(
+class Student(
     val secondname: String,
     val firstname: String,
     val fathername: String?,
