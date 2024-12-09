@@ -5,6 +5,11 @@ plugins {
     id("org.springframework.boot") version "3.4.0"
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("plugin.allopen") version "1.9.25"
+    application
+}
+
+application {
+    mainClass.set("com.ibbd.laba.LabaApplicationKt")
 }
 
 allOpen {
@@ -42,8 +47,4 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }

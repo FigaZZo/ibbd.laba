@@ -13,9 +13,18 @@ private val mapper = jacksonObjectMapper()
 class Controller(private val service: StudentService) {
 
     @GetMapping("/students")
-    fun getStudentList(): String {
+    fun getStudentList(@RequestParam(required = true) page: Int,
+                       @RequestParam(required = true) limit: Int,
+                       @RequestParam(required = false) firstname: String?,
+                       @RequestParam(required = false) secondname: String?,
+                       @RequestParam(required = false) fathername: String?,
+                       @RequestParam(required = false) faculty: String?,
+                       @RequestParam(required = false) groupId: String?,
+                       @RequestParam(required = false) year: Int?,
+                       ): String {
         logger.debug{ "Getting student list" }
-        return mapper.writeValueAsString(service.getStudentList())
+        val filter = Student(secondname, firstname, fathername, year, groupId, faculty)
+        return mapper.writeValueAsString(service.getStudentBlock(page, limit, filter))
     }
 
     @PostMapping(value = ["/students/add"], consumes = ["application/json"])

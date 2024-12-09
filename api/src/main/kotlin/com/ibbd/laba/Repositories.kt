@@ -1,5 +1,7 @@
 package com.ibbd.laba
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 
-interface StudentsRepository: CrudRepository<Student, Int> {}
+interface StudentsRepository: JpaRepository<Student, Int> {
+}

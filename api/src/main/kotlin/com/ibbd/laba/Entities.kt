@@ -7,11 +7,11 @@ import jakarta.persistence.Id
 
 @Entity
 class Student(
-    val secondname: String,
-    val firstname: String,
+    val secondname: String?,
+    val firstname: String?,
     val fathername: String?,
-    var year: Int,
-    var groupId: String,
-    var faculty: String,
+    var year: Int?,
+    var groupId: String?,
+    var faculty: String?,
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val studentId: Int? = null,
 )

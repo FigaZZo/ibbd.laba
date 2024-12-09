@@ -21,3 +21,15 @@ services:
       - db
     ports:
       - "3000:8080"
+
+  front:
+    build: ./frontend
+    container_name: front
+    restart: always
+    depends_on:
+      - db
+      - api
+    ports:
+      - "80:80"
+    environment:
+      API_URL: http://api:8080

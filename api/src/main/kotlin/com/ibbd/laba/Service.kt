@@ -1,7 +1,11 @@
 package com.ibbd.laba
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.springframework.data.domain.Example
+import org.springframework.data.domain.ExampleMatcher
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
+
 
 private val logger = KotlinLogging.logger {}
 
@@ -25,5 +29,11 @@ class StudentService(private val db: StudentsRepository) {
     fun deleteStudent(id: Int): Unit {
         logger.debug{ "Deleting student with id $id" }
         db.deleteById(id)
+    }
+
+    fun getStudentBlock(page: Int, limit: Int, filter: Student): List<Student> {
+        val matcher: ExampleMatcher = ExampleMatcher.matching()
+        val example: Example<Student> = Example.of(filter, matcher)
+        return db.findAll(example, PageRequest.of(page, limit)).toList()
     }
 }
